@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+work_dir/MedSAM-ViT-B_MSFalse_oneneckFalse_use_clip_20250611-1232
+*.pth
+*.sh
+data/
+work_dir/SAM/sam_vit_b_01ec64.pth
+MedSAM/images.zip
+MedSAM/images
+MedSAM/labels
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 
+
+# Ignore specified files and directories
+environment.yml
+get_clip_embedding1.py
+preprocess.py
+requirements.txt
+train_one_organ.py
+train_one_gpu_bioclip.py
+train_one_gpu_clip.py
+Pre_CT_2d.py
+.DS_Store
+utils/
+segment_anything/
+__pycache__/
