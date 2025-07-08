@@ -23,6 +23,7 @@ import random
 from datetime import datetime
 import shutil
 import glob
+from utils.SurfaceDice import compute_dice_coefficient
 
 # set seeds
 torch.manual_seed(2023)
@@ -288,6 +289,7 @@ def main():
     num_epochs = args.num_epochs
     iter_num = 0
     losses = []
+    train_accuracy = []
     best_loss = 1e10
     train_dataset = NpyDataset(args.tr_npy_path)
 
@@ -313,6 +315,7 @@ def main():
 
     for epoch in range(start_epoch, num_epochs):
         epoch_loss = 0
+        epoch_dice = 0
         for step, (image, gt2D, boxes, _) in enumerate(tqdm(train_dataloader)):
             optimizer.zero_grad()
             boxes_np = boxes.detach().cpu().numpy()
@@ -321,7 +324,7 @@ def main():
                 ## AMP
                 with torch.autocast(device_type="cuda", dtype=torch.float16):
                     medsam_pred = medsam_model(image, boxes_np)
-                    loss = seg_loss(medsam_pred, gt2D) + ce_loss(
+                    loss = seg_loss(medsam_pred, gt2D.float()) + ce_loss(
                         medsam_pred, gt2D.float()
                     )
                 scaler.scale(loss).backward()
@@ -330,20 +333,28 @@ def main():
                 optimizer.zero_grad()
             else:
                 medsam_pred = medsam_model(image, boxes_np)
-                loss = seg_loss(medsam_pred, gt2D) + ce_loss(medsam_pred, gt2D.float())
+                loss = seg_loss(medsam_pred, gt2D.float()) + ce_loss(medsam_pred, gt2D.float())
                 loss.backward()
                 optimizer.step()
                 optimizer.zero_grad()
 
+            # Compute dice coefficient
+            dice = compute_dice_coefficient(
+                gt2D.cpu().numpy(), (medsam_pred > 0.5).cpu().numpy()
+            )
+            
             epoch_loss += loss.item()
+            epoch_dice += dice
             iter_num += 1
 
         epoch_loss /= step
+        epoch_dice /= step
         losses.append(epoch_loss)
+        train_accuracy.append(epoch_dice)
         if args.use_wandb:
-            wandb.log({"epoch_loss": epoch_loss})
+            wandb.log({"epoch_loss": epoch_loss, "epoch_dice": epoch_dice})
         print(
-            f'Time: {datetime.now().strftime("%Y%m%d-%H%M")}, Epoch: {epoch}, Loss: {epoch_loss}'
+            f'Time: {datetime.now().strftime("%Y%m%d-%H%M")}, Epoch: {epoch}, Loss: {epoch_loss:.4f}, Dice: {epoch_dice:.4f}'
         )
         ## save the latest model
         checkpoint = {
@@ -367,7 +378,7 @@ def main():
         plt.title("Dice + Cross Entropy Loss")
         plt.xlabel("Epoch")
         plt.ylabel("Loss")
-        plt.savefig(join(model_save_path, args.task_name + "train_loss.png"))
+        plt.savefig(join(model_save_path, args.task_name + "_train_loss.png"))
         plt.close()
 
 
