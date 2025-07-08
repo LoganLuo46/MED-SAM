@@ -1,0 +1,35 @@
+number of images: 3621
+torch.Size([8, 3, 1024, 1024]) torch.Size([8, 1, 1024, 1024]) torch.Size([8, 4])
+Number of total parameters:  93735472
+Number of trainable parameters:  93729252
+Number of image encoder and mask decoder parameters:  93729252
+number of images: 3621
+Number of training samples:  3621
+Time: 20250707-2325, Epoch: 0, Loss: 0.0927, Dice: 0.9001
+Time: 20250707-2339, Epoch: 1, Loss: 0.0727, Dice: 0.9210
+Time: 20250707-2353, Epoch: 2, Loss: 0.0624, Dice: 0.9326
+Time: 20250708-0007, Epoch: 3, Loss: 0.0674, Dice: 0.9256
+Time: 20250708-0021, Epoch: 4, Loss: 0.0605, Dice: 0.9326
+Time: 20250708-0035, Epoch: 5, Loss: 0.0565, Dice: 0.9392
+Time: 20250708-0050, Epoch: 6, Loss: 0.0546, Dice: 0.9395
+Time: 20250708-0103, Epoch: 7, Loss: 0.0498, Dice: 0.9443
+Time: 20250708-0117, Epoch: 8, Loss: 0.0503, Dice: 0.9434
+Time: 20250708-0131, Epoch: 9, Loss: 0.0483, Dice: 0.9457
+Time: 20250708-0145, Epoch: 10, Loss: 0.0449, Dice: 0.9498
+Time: 20250708-0159, Epoch: 11, Loss: 0.0460, Dice: 0.9481
+Time: 20250708-0213, Epoch: 12, Loss: 0.0443, Dice: 0.9497
+Time: 20250708-0227, Epoch: 13, Loss: 0.0469, Dice: 0.9478
+Time: 20250708-0241, Epoch: 14, Loss: 0.0477, Dice: 0.9470
+Time: 20250708-0255, Epoch: 15, Loss: 0.0429, Dice: 0.9527
+Time: 20250708-0309, Epoch: 16, Loss: 0.0422, Dice: 0.9534
+Time: 20250708-0324, Epoch: 17, Loss: 0.0402, Dice: 0.9558
+Time: 20250708-0338, Epoch: 18, Loss: 0.0396, Dice: 0.9552
+Time: 20250708-0352, Epoch: 19, Loss: 0.0382, Dice: 0.9569
+Time: 20250708-0406, Epoch: 20, Loss: 0.0412, Dice: 0.9537
+Time: 20250708-0421, Epoch: 21, Loss: 0.0372, Dice: 0.9579
+Time: 20250708-0435, Epoch: 22, Loss: 0.0374, Dice: 0.9577
+Time: 20250708-0449, Epoch: 23, Loss: 0.0426, Dice: 0.9532
+Time: 20250708-0503, Epoch: 24, Loss: 0.0349, Dice: 0.9611
+Time: 20250708-0518, Epoch: 25, Loss: 0.0374, Dice: 0.9579
+Time: 20250708-0532, Epoch: 26, Loss: 0.0380, Dice: 0.9578
+Time: 20250708-0547, Epoch: 27, Loss: 0.0348, Dice: 0.9606
